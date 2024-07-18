@@ -20,14 +20,12 @@ function verificarlogin() {
 
 if ($segments[0] === 'bank') {
     switch ($segments[1] ?? '') {
-        case 'login':
-            //include ROOT_VIEW . '/security/login.php';
+        case 'sign-in':
+            include ROOT_VIEW . '/security/sign-in.php';
             break;
-        /*
-        case 'register':
-            //include ROOT_VIEW . '/security/register.php';
+        case 'sign-up':
+            include ROOT_VIEW . '/security/sign-up.php';
             break;
-        
         case 'logout':
             session_destroy();
             $clientindex = new HttpClient(HTTP_BASE);
@@ -36,14 +34,22 @@ if ($segments[0] === 'bank') {
             ]);
             echo '<script>window.location.href="' . HTTP_BASE . '/login"</script>';
             break;
-        */
         case 'web':
-            /*
-            verificarlogin();
+            
+            //verificarlogin();
             switch ($segments[2] ?? '') {
-                case "bank":
+                case 'customer':
+                    include ROOT_VIEW . '/web/customer.php';
+                    break;
+                case 'system':
                     switch ($segments[3] ?? '') {
-                        case "list":
+                        case 'dashboard':
+                            include ROOT_VIEW . '/web/dashboard.php';
+                            break;
+                        case 'profile':
+                            include ROOT_VIEW . '/web/profile.php';
+                            break;
+                        case 'list':
                             include ROOT_VIEW . '/web/bank/list.php';
                             break;
                         case 'edit':
@@ -91,7 +97,7 @@ if ($segments[0] === 'bank') {
                     home();
                     break;
             }
-            */
+            
             break;
         default:
             home();
