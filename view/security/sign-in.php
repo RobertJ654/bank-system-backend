@@ -38,15 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo "<script>alert('Hubo un problema, Contactarse con el Administrador de Sistemas');</script>";
     }
 }
-
-
 ?>
-
-
-
-
-
-
 
 <!DOCTYPE html>
 <html lang="en">

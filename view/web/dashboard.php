@@ -1,19 +1,12 @@
 <!--   Agregamos el HEADER   -->
 <?php require ROOT_VIEW.'/template/header.php'; ?>
 
-
-
-
 <body class="g-sidenav-show   bg-gray-100">
-  <div class="min-height-300 bg-gradient-dark position-absolute w-100"></div>
-  
-
+<div class="min-height-300 bg-gradient-dark position-absolute w-100"></div>
   
   <!--   Agregamos el componente SIDENAV   -->
-    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
-        
+    <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main"> 
         <?php require ROOT_VIEW.'/template/sidenav.php'; ?>
-
         <li class="nav-item mt-3">
           <h6 class="ps-4 ms-2 text-uppercase text-xs font-weight-bolder opacity-6">Acceso Autorizado</h6>
         </li>
@@ -25,18 +18,11 @@
             <span class="nav-link-text ms-1">Clientes</span>
           </a>
         </li>
-
     </aside>
-
-  
   <main class="main-content position-relative border-radius-lg ">
-    
-
 
   <!--   Agregamos el componente NAVBAR   -->
   <?php require ROOT_VIEW.'/template/navbar.php'; ?>
-
-
 
     <div class="container-fluid py-4">
       <div class="row">
@@ -413,22 +399,14 @@
         </div>
       </div>
       
-
-
       <!--   Agregamos el componente FOOTER   -->
       <?php require ROOT_VIEW.'/template/footer.php'; ?>
-      
-
 
     </div>
   </main>
-  
-
 
   <!--   Agregamos el componente SETTINGS   -->
   <?php require ROOT_VIEW.'/template/settings.php'; ?>
-
-
 
   <!--   Core JS Files   -->
   <script src="<?php echo URL_RESOURCES."/lib/argon-dashboard/"; ?>/assets/js/core/popper.min.js"></script>
@@ -438,9 +416,7 @@
   <script src="<?php echo URL_RESOURCES."/lib/argon-dashboard/"; ?>/assets/js/plugins/chartjs.min.js"></script>
   <script>
     var ctx1 = document.getElementById("chart-line").getContext("2d");
-
     var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
-
     gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
     gradientStroke1.addColorStop(0.2, 'rgba(94, 114, 228, 0.0)');
     gradientStroke1.addColorStop(0, 'rgba(94, 114, 228, 0)');

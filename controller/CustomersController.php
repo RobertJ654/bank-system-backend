@@ -4,27 +4,31 @@ header("Access-Control-Allow-Methods: PUT, GET, POST");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 header("Content-Type: application/json; charset=UTF-8");
 
-
+// Inicia la sesión si no está iniciada
 session_start();
 
-// Hacemos las importaciones
+// Hace las importaciones necesarias
 require_once($_SERVER['DOCUMENT_ROOT'] . "/bank/config/global.php");
 require_once(ROOT_DIR . "/model/CustomersModel.php");
 
-// Capturamos el método
 $method = $_SERVER['REQUEST_METHOD'];
 $input  = json_decode(file_get_contents('php://input'), true);
+
 try {
+    // Intenta obtener la información de la ruta
     $Path_Info = isset($_SERVER['PATH_INFO']) ? $_SERVER['PATH_INFO'] : (isset($_SERVER['ORIG_PATH_INFO']) ? $_SERVER['ORIG_PATH_INFO'] : '');
     $request = explode('/', trim($Path_Info, '/'));
 } catch (Exception $e) {
     echo $e->getMessage();
 }
 
-// Hacemos el filtrado segúen el método obtenido
+// Filtra la petición según el método HTTP recibido
 switch ($method) {
     case 'GET':
+        // Obtiene el parámetro 'ope' del input o de los parámetros GET
         $p_ope = !empty($input['ope']) ? $input['ope'] : $_GET['ope'];
+        
+        // Según el valor de 'ope', llama a una función específica
         if (!empty($p_ope)) {
             if ($p_ope == 'filterall') {
                 filterAll($input);
@@ -45,6 +49,7 @@ switch ($method) {
         delete($input);
         break;
     default:
+        // Si el método no está soportado, imprime un mensaje
         echo 'NO SOPORTADO';
         break;
 }
@@ -81,7 +86,8 @@ function filterPaginateAll($input)
 }
 
 // Función para agregar un nuevo registro a la tabla customers
-function insert($input){
+function insert($input)
+{
     $p_name = !empty($input['name']) ? $input['name'] : $_POST['name'];
     $p_lastname = !empty($input['lastname']) ? $input['lastname'] : $_POST['lastname'];
     $p_email = !empty($input['email']) ? $input['email'] : $_POST['email'];
@@ -95,7 +101,8 @@ function insert($input){
 }
 
 // Función para actualizar un registro de la tabla customers según el id
-function update($input){
+function update($input)
+{
     $p_id = !empty($input['id']) ? $input['id'] : $_POST['id'];
     $p_name = !empty($input['name']) ? $input['name'] : $_POST['name'];
     $p_lastname = !empty($input['lastname']) ? $input['lastname'] : $_POST['lastname'];
@@ -108,13 +115,12 @@ function update($input){
     echo json_encode($var);
 }
 
-
 // Función para borrar un registro de la tabla customers por id
-function delete($input){
+function delete($input)
+{
     $p_id = !empty($input['id']) ? $input['id'] : $_POST['id'];
     $objIns = new CustomersModel();
     $var = $objIns->delete($p_id);
     echo json_encode($var);
 }
-
 ?>

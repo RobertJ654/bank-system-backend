@@ -4,13 +4,10 @@ header("Access-Control-Allow-Methods: PUT, GET, POST");
 header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
 header("Content-Type: application/json; charset=UTF-8");
 
-
 session_start();
 
 require_once($_SERVER['DOCUMENT_ROOT'] . "/bank/config/global.php");
-
-require_once(ROOT_DIR . "/model/UsuarioModel.php");
-
+require_once(ROOT_DIR . "/model/UsersModel.php");
 
 $method = $_SERVER['REQUEST_METHOD'];
 $input = json_decode(file_get_contents('php://input'), true);
@@ -21,8 +18,8 @@ try {
 } catch (Exception $e) {
     echo $e->getMessage();
 }
-switch ($method) {
 
+switch ($method) {
     case 'POST':
         $p_ope = !empty($input['ope']) ? $input['ope'] : $_POST['ope'];
         if ($p_ope == 'login') {
@@ -35,12 +32,14 @@ switch ($method) {
         break;
 }
 
-function  login($input)
+// Verifica las credenciales de inicio de sesión del usuario.
+// Utiliza el correo electrónico y contraseña proporcionados, y maneja las sesiones.
+function login($input)
 {
     $p_correo_electronico = !empty($input['correo_electronico']) ? $input['correo_electronico'] : $_POST['correo_electronico'];
     $p_password = !empty($input['contrasena']) ? $input['contrasena'] : $_POST['contrasena'];
     $p_password = hash('sha512', md5($p_password));
-    $su   = new UsuarioModel();
+    $su = new UsersModel();
     $var = $su->verificarlogin($p_correo_electronico, $p_password);
     if (count($var['DATA']) > 0) {
         $_SESSION['login'] = $var['DATA'][0];
@@ -49,19 +48,23 @@ function  login($input)
     } else {
         $array = array();
         $array['ESTADO'] = false;
-        $array['ERROR'] = "Usuario o Contraseña no valida, verifique sus datos, demasiados intentos bloqueara al usuario el acceso al sistema.";
-        echo json_encode($var);
+        $array['ERROR'] = "Usuario o Contraseña no válida, verifique sus datos, demasiados intentos bloqueará al usuario el acceso al sistema.";
+        echo json_encode($array);
         exit();
     }
 }
+
+// Registra un nuevo usuario en el sistema.
+// Utiliza el correo electrónico, nombre y contraseña proporcionados.
 function register($input)
 {
     $p_correo_electronico = !empty($input['correo_electronico']) ? $input['correo_electronico'] : $_POST['correo_electronico'];
     $p_nombre = !empty($input['nombre']) ? $input['nombre'] : $_POST['nombre'];
     $p_contrasena = !empty($input['contrasena']) ? $input['contrasena'] : $_POST['contrasena'];
     $p_contrasena = hash('sha512', md5($p_contrasena));
-    $tseg_usuario = new UsuarioModel();
+    $tseg_usuario = new UsersModel();
     $var = $tseg_usuario->register($p_correo_electronico, $p_nombre, $p_contrasena);
 
     echo json_encode($var);
 }
+?>

@@ -1,30 +1,15 @@
 <!--   Agregamos el HEADER   -->
 <?php require ROOT_VIEW.'/template/header.php'; ?>
 
-
-
-
-
-
 <body class="g-sidenav-show bg-gray-100">
   <div class="position-absolute w-100 min-height-300 top-0" style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/profile-layout-header.jpg'); background-position-y: 50%;">
     <span class="mask bg-gradient-dark opacity-6"></span>
   </div>
-
-
       <!--   Agregamos el componente SIDENAV   -->
     <aside class="sidenav bg-white navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-4 " id="sidenav-main">
-        
         <?php require ROOT_VIEW.'/template/sidenav.php'; ?>
-
     </aside>
-
-
-
-
   <div class="main-content position-relative max-height-vh-100 h-100">
-
-
 
     <div class="card shadow-lg mx-4 card-profile-bottom">
       <div class="card-body p-3">
@@ -74,9 +59,7 @@
     <div class="container-fluid py-4">
       <div class="row">
 
-
       <!-- Aquí inicia el editar -->
-
         <div class="col-md-8">
           <div class="card">
             <div class="card-header pb-0">
@@ -146,9 +129,6 @@
                 </div>
               </div>
             </div>
-
-
-
             <div class="card-header pb-0">
               <div class="d-flex align-items-center">
                 <p class="mb-0"><b>Verifique su información antes de continuar</b></p>
@@ -158,15 +138,9 @@
             <hr class="horizontal dark">
             <hr class="horizontal dark">
             <hr class="horizontal dark">
-
           </div>
         </div>
-
-
         <!-- Hasta aquí es el editar -->
-
-
-
 
         <div class="col-md-4">
           <div class="card card-profile">
@@ -260,14 +234,8 @@
     </div>
   </div>
 
-
-
-
   <!--   Agregamos el componente SETTINGS   -->
   <?php require ROOT_VIEW.'/template/settings.php'; ?>
-
-
-  
 
   <!--   Core JS Files   -->
   <script src="<?php echo URL_RESOURCES."/lib/argon-dashboard/"; ?>/assets/js/core/popper.min.js"></script>

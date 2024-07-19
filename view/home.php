@@ -1,27 +1,15 @@
 <!--   Agregamos el HEADER   -->
 <?php require ROOT_VIEW.'/template/header.php'; ?>
 
-
-
-
 <body class="g-sidenav-show   bg-gray-100">
   <div class="min-height-300 bg-gradient-dark position-absolute w-100"></div>
   
-
-  
-  <!--   Agregamos el componente SIDENAV   -->
-  <?php //require ROOT_VIEW.'/template/sidenav.php'; ?>
-
-
-  
-  <main class="main-content position-relative border-radius-lg ">
+<!--   Agregamos el componente SIDENAV   -->
+<?php //require ROOT_VIEW.'/template/sidenav.php'; ?>
+<main class="main-content position-relative border-radius-lg ">
     
-
-
   <!--   Agregamos el componente NAVBAR   -->
   <?php require ROOT_VIEW.'/template/navbar.php'; ?>
-
-
 
     <div class="container-fluid py-4">
       <div class="row mt-4">
@@ -296,23 +284,15 @@
           </div>
         </div>
       </div>
-      
-
 
       <!--   Agregamos el componente FOOTER   -->
       <?php require ROOT_VIEW.'/template/footer.php'; ?>
       
-
-
     </div>
   </main>
-  
-
 
   <!--   Agregamos el componente SETTINGS   -->
   <?php //require ROOT_VIEW.'/template/settings.php'; ?>
-
-
 
   <!--   Core JS Files   -->
   <script src="<?php echo URL_RESOURCES."/lib/argon-dashboard/"; ?>/assets/js/core/popper.min.js"></script>
@@ -322,7 +302,6 @@
   <script src="<?php echo URL_RESOURCES."/lib/argon-dashboard/"; ?>/assets/js/plugins/chartjs.min.js"></script>
   <script>
     var ctx1 = document.getElementById("chart-line").getContext("2d");
-
     var gradientStroke1 = ctx1.createLinearGradient(0, 230, 0, 50);
 
     gradientStroke1.addColorStop(1, 'rgba(94, 114, 228, 0.2)');
