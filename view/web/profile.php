@@ -37,10 +37,10 @@
           <div class="col-auto my-auto">
             <div class="h-100">
               <h5 class="mb-1">
-              Mark Davis
+              <?php echo $_SESSION['login']['nombre']; ?>
               </h5>
               <p class="mb-0 font-weight-bold text-sm">
-              Computer Science
+              <a href="#" class="d-block"><?php echo $_SESSION['login']['correo_electronico']; ?></a>
               </p>
             </div>
           </div>
@@ -152,7 +152,7 @@
             <div class="card-header pb-0">
               <div class="d-flex align-items-center">
                 <p class="mb-0"><b>Verifique su información antes de continuar</b></p>
-                <a class="btn btn-danger btn-sm ms-auto" href="<?php echo HTTP_BASE;?>/web/system/dashboard">Guardar</a>
+                <a class="btn btn-danger btn-sm ms-auto" href="">Guardar</a>
               </div>
             </div>
             <hr class="horizontal dark">
@@ -208,8 +208,7 @@
                 </div>
               </div>
               <div class="text-center mt-4">
-                <h5>
-                  Mark Davis<span class="font-weight-light">, 35</span>
+                <h5><?php echo $_SESSION['login']['nombre']; ?><span class="font-weight-light">, 35</span>
                 </h5>
                 <div class="h6 font-weight-300">
                   <i class="ni location_pin mr-2"></i>Bucharest, Romania
@@ -218,7 +217,8 @@
                   <i class="ni business_briefcase-24 mr-2"></i>Solution Manager - Creative Tim Officer
                 </div>
                 <div>
-                  <i class="ni education_hat mr-2"></i>University of Computer Science
+                  <i class="ni education_hat mr-2"></i>
+                  <a href="#" class="d-block"><?php echo $_SESSION['login']['correo_electronico']; ?></a>
                 </div>
               </div>
             </div>

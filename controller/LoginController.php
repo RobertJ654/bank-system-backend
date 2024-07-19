@@ -7,7 +7,7 @@ header("Content-Type: application/json; charset=UTF-8");
 
 session_start();
 
-require_once($_SERVER['DOCUMENT_ROOT'] . "/clientes/config/global.php");
+require_once($_SERVER['DOCUMENT_ROOT'] . "/bank/config/global.php");
 
 require_once(ROOT_DIR . "/model/UsuarioModel.php");
 

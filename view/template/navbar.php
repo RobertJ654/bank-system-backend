@@ -16,12 +16,24 @@
             </div>
           </div>
           <ul class="navbar-nav  justify-content-end">
-            <li class="nav-item d-flex align-items-center">
-              <a href="<?php echo HTTP_BASE;?>/sign-in" class="nav-link text-white font-weight-bold px-0">
-                <i class="fa fa-user me-sm-1"></i>
-                <span class="d-sm-inline d-none">Sign In</span>
-              </a>
-            </li>
+
+
+          <li class="nav-item d-flex align-items-center">
+    <?php if (isset($_SESSION['login'])): ?>
+        <a href="<?php echo HTTP_BASE; ?>/web/system/dashboard" class="nav-link text-white font-weight-bold px-0">
+            <i class="fa fa-user me-sm-1"></i>
+            <span class="d-sm-inline d-none text-uppercase"><?php echo $_SESSION['login']['nombre']; ?></span>
+        </a>
+    <?php else: ?>
+        <a href="<?php echo HTTP_BASE; ?>/sign-in" class="nav-link text-white font-weight-bold px-0">
+            <i class="fa fa-user me-sm-1"></i>
+            <span class="d-sm-inline d-none text-uppercase">Ingresar</span>
+        </a>
+    <?php endif; ?>
+</li>
+
+
+
             <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
               <a href="javascript:;" class="nav-link text-white p-0" id="iconNavbarSidenav">
                 <div class="sidenav-toggler-inner">

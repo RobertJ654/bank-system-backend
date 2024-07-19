@@ -87,10 +87,10 @@ if ($pId) {
           <div class="col-auto my-auto">
             <div class="h-100">
               <h5 class="mb-1">
-              Mark Davis
+              Admin | <?php echo $_SESSION['login']['nombre']; ?>
               </h5>
               <p class="mb-0 font-weight-bold text-sm">
-              Computer Science
+              <a href="#" class="d-block"><?php echo $_SESSION['login']['correo_electronico']; ?></a>
               </p>
             </div>
           </div>
@@ -134,7 +134,7 @@ if ($pId) {
 
             <div class="card-header pb-0">
               <div class="d-flex align-items-center">
-                <p class="mb-0"><b>Ver Información de Cliente</b></p>
+                <p class="mb-0"><b>Eliminar registro de Cliente</b></p>
                 <a class="btn btn-success btn-sm ms-auto" href="<?php echo HTTP_BASE;?>/web/system/list">Volver</a>
               </div>
             </div>

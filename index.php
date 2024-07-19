@@ -32,16 +32,16 @@ if ($segments[0] === 'bank') {
             $result = $clientindex->post('/controller/LoginController.php',  [
                 'ope' => 'logout',
             ]);
-            echo '<script>window.location.href="' . HTTP_BASE . '/login"</script>';
+            echo '<script>window.location.href="' . HTTP_BASE . '/sign-in"</script>';
             break;
         case 'web':
-            
-            //verificarlogin();
+            verificarlogin();
             switch ($segments[2] ?? '') {
                 case 'customer':
                     include ROOT_VIEW . '/web/customer.php';
                     break;
                 case 'system':
+                    verificarlogin();
                     switch ($segments[3] ?? '') {
                         case 'dashboard':
                             include ROOT_VIEW . '/web/dashboard.php';
@@ -81,7 +81,7 @@ if ($segments[0] === 'bank') {
                             }
                             break;
                         default:
-                            home();
+                            include ROOT_VIEW . '/home.php';
                             break;
                     }
                     break;

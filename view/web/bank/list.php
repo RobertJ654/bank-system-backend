@@ -108,6 +108,16 @@ if ($end_page > $total_pages) {
                 <table class="table align-items-center mb-0">
 
 
+                  <!--   Botones para crear nuevo cliente y generar el reporte de PDF   -->
+                <div class="card-body">
+                    <a href="<?php echo HTTP_BASE . "/web/system/create/";?>" class="btn btn-success btn-sm w-100">Nuevo Cliente</a>
+
+                    <a href="<?php echo HTTP_BASE . "/report/rpt_pdf_total_inscritos.php"; ?>" class="btn btn-link text-dark text-sm mb-0 px-0 ms-4">
+                        <i class="fas fa-file-pdf text-lg me-1" aria-hidden="true"></i> Generar reporte PDF
+                    </a>
+                </div>
+
+                
                   <thead>
                     <tr>
                       <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-10">ID</th>
@@ -131,7 +141,7 @@ if ($end_page > $total_pages) {
                         <td>
                           <div class="d-flex px-2 py-1">
                             <div>
-                              <img src="<?php echo URL_RESOURCES."/lib/argon-dashboard/"; ?>/assets/img/team-2.jpg" class="avatar avatar-sm me-3" alt="user1">
+                              <img src="<?php echo URL_RESOURCES."/lib/argon-dashboard/"; ?>/assets/img/team-4.jpg" class="avatar avatar-sm me-3" alt="user1">
                             </div>
                             <div class="d-flex flex-column justify-content-center">
                               <h6 class="mb-0 text-sm"><?php echo htmlspecialchars($row['name']);?> <?php echo htmlspecialchars($row['lastname']);?></h6>
@@ -177,7 +187,7 @@ if ($end_page > $total_pages) {
                                         <li class="page-item">
                                             <form action="" method="POST">
                                                 <input type="hidden" name="page" value="1">
-                                                <button type="submit" class="page-link">Primera</button>
+                                                <button type="submit" class="page-link"> Inicio </button>
                                             </form>
                                         </li>
                                         <li class="page-item">
@@ -206,7 +216,7 @@ if ($end_page > $total_pages) {
                                         <li class="page-item">
                                             <form action="" method="POST">
                                                 <input type="hidden" name="page" value="<?php echo $total_pages; ?>">
-                                                <button type="submit" class="page-link">Ultima </button>
+                                                <button type="submit" class="page-link"> Fin </button>
                                             </form>
 
                                         </li>

@@ -1,3 +1,53 @@
+<?php
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $ope = 'login';
+    $p_correo_electronico = $_POST['email'];
+    $p_contrasena = $_POST['psw'];
+    //Validar
+    try {
+        $data = [
+            'ope' => $ope,
+            'correo_electronico' => $p_correo_electronico,
+            'contrasena' => $p_contrasena,
+        ];
+        $context = stream_context_create([
+            'http' => [
+                'method' => 'POST',
+                'header' => 'Content-Type: application/json',
+                'content' => json_encode($data),
+            ]
+        ]);
+        $url = HTTP_BASE . "/controller/LoginController.php";
+        $response = file_get_contents($url, false, $context);
+        $result = json_decode($response, true);
+        if ($result["ESTADO"] && isset($result['DATA']) &&  !empty($result['DATA'])  ) {
+            $_SESSION['login'] = $result['DATA'][0];
+            if(isset($_SESSION['login']['nombre']))
+            {
+                echo "<script>alert('Acceso Autorizado');</script>";
+                echo '<script>window.location.href ="'.HTTP_BASE.'/web/system/dashboard";</script>';
+            }
+            else{
+                echo "<script>alert('Acceso No Autorizado');</script>";
+            }
+            
+        } else {
+            echo "<script>alert('Hubo un problema, Contactarse con el Administrador de Sistemas');</script>";
+        }
+    } catch (Exception $e) {
+        echo "<script>alert('Hubo un problema, Contactarse con el Administrador de Sistemas');</script>";
+    }
+}
+
+
+?>
+
+
+
+
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -81,17 +131,24 @@
                   <p class="mb-0">Enter your email and password to sign in</p>
                 </div>
                 <div class="card-body">
-                  <form role="form">
+
+
+
+                  <form action="" method="post">
                     <div class="mb-3">
-                      <input type="email" class="form-control form-control-lg" placeholder="Email" aria-label="Email">
+                      <input type="email" class="form-control form-control-lg" placeholder="Email" aria-label="Email" name="email">
                     </div>
                     <div class="mb-3">
-                      <input type="email" class="form-control form-control-lg" placeholder="Password" aria-label="Password">
+                      <input type="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password" name="psw">
                     </div>
                     <div class="text-center">
-                      <button type="button" class="btn btn-lg btn-dark btn-lg w-100 mt-4 mb-0">Sign in</button>
+                      <button type="submit" class="btn btn-lg btn-dark btn-lg w-100 mt-4 mb-0">Sign in</button>
                     </div>
                   </form>
+
+
+
+
                 </div>
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
                   <p class="mb-4 text-sm mx-auto">
