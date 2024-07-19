@@ -1,5 +1,5 @@
 <?php
-include_once "../core/ModeloBasePDO.php";
+include_once "../core/ModelBasePDO.php";
 class CustomersModel extends ModelBasePDO
 {
     // Constructor
@@ -8,33 +8,32 @@ class CustomersModel extends ModelBasePDO
         parent::__construct();
     }
 
-    // Selecciona todos los datos de la tabla
+    // Selecciona todos los datos de la tabla customers
     public function findAll()
     {
-        $sql = "SELECT `client_id`, `name`, `lastname`, `email`, `birthday`, `address`, `city`, `phone`, `registrationdate` 
+        $sql = "SELECT `id`, `name`, `lastname`, `email`, `birthday`, `address`, `city`, `phone`, `registration_date` 
         FROM `customers`;";
         $param = array();
         return parent::gselect($sql, $param);
     }
 
-    // Selecciona datos por client_id
+    // Selecciona datos por id de customers
     public function findId($p_id)
     {
-        $sql = "SELECT `client_id`, `name`, `lastname`, `email`, `birthday`, `address`, `city`, `phone`, `registrationdate` 
+        $sql = "SELECT `id`, `name`, `lastname`, `email`, `birthday`, `address`, `city`, `phone`, `registration_date` 
         FROM `customers` 
-        WHERE client_id = :p_id;  ";
+        WHERE id = :p_id;  ";
         $param = array();
         array_push($param, [':p_id', $p_id, PDO::PARAM_INT]);
         return parent::gselect($sql, $param);
     }
 
-    // Función para la paginación
-
+    // Función para la paginación lista de la tabla customers
     public function findpaginateall($p_search, $p_limit, $p_offset)
     {
-        $sql = "SELECT `client_id`, `name`, `lastname`, `email`, `birthday`, `address`, `city`, `phone`, `registrationdate` 
+        $sql = "SELECT `id`, `name`, `lastname`, `email`, `birthday`, `address`, `city`, `phone`, `registration_date` 
         FROM `customers` 
-        WHERE upper(concat(IFNULL(`client_id`,''),IFNULL(`name`,''),IFNULL(`lastname`,''),IFNULL(`email`,''),IFNULL(`birthday`,''),IFNULL(`address`,''),IFNULL(`city`,''),IFNULL(`phone`,''),IFNULL(`registrationdate`,''))) 
+        WHERE upper(concat(IFNULL(`id`,''),IFNULL(`name`,''),IFNULL(`lastname`,''),IFNULL(`email`,''),IFNULL(`birthday`,''),IFNULL(`address`,''),IFNULL(`city`,''),IFNULL(`phone`,''),IFNULL(`registration_date`,''))) 
         like concat('%',upper(IFNULL(:p_search,'')),'%') 
         LIMIT :p_limit
         OFFSET :p_offset";
@@ -46,7 +45,7 @@ class CustomersModel extends ModelBasePDO
 
         $sqlCount = "SELECT count(1)  as cant
         FROM `customers` 
-        WHERE upper(concat(IFNULL(`client_id`,''),IFNULL(`name`,''),IFNULL(`lastname`,''),IFNULL(`email`,''),IFNULL(`birthday`,''),IFNULL(`address`,''),IFNULL(`city`,''),IFNULL(`phone`,''),IFNULL(`registrationdate`,''))) 
+        WHERE upper(concat(IFNULL(`id`,''),IFNULL(`name`,''),IFNULL(`lastname`,''),IFNULL(`email`,''),IFNULL(`birthday`,''),IFNULL(`address`,''),IFNULL(`city`,''),IFNULL(`phone`,''),IFNULL(`registration_date`,''))) 
         like concat('%',upper(IFNULL(:p_search,'')),'%')";
         $param = array();
         array_push($param, [':p_search', $p_search, PDO::PARAM_STR]);
@@ -55,11 +54,11 @@ class CustomersModel extends ModelBasePDO
         return $var;
     }
 
-    // Insertar datos dentro de la tabla
-    public function insert($p_name, $p_lastname, $p_email, $p_birthday, $p_address, $p_city, $p_phone, $p_password, $p_registrationdate)
+    // Insertar datos dentro de la tabla customers
+    public function insert($p_name, $p_lastname, $p_email, $p_birthday, $p_address, $p_city, $p_phone)
     {
-        $sql = "INSERT INTO `customers`(`name`, `lastname`, `email`, `birthday`, `address`, `city`, `phone`, `password`, `registrationdate`) 
-        VALUES (:p_name, :p_lastname, :p_email, :p_birthday, :p_address, :p_city, :p_phone, :p_password, now());";
+        $sql = "INSERT INTO `customers`(`name`, `lastname`, `email`, `birthday`, `address`, `city`, `phone`, `registration_date`) 
+        VALUES (:p_name, :p_lastname, :p_email, :p_birthday, :p_address, :p_city, :p_phone, now());";
         $param = array();
         array_push($param, [':p_name', $p_name, PDO::PARAM_STR]);
         array_push($param, [':p_lastname', $p_lastname, PDO::PARAM_STR]);
@@ -68,34 +67,44 @@ class CustomersModel extends ModelBasePDO
         array_push($param, [':p_address', $p_address, PDO::PARAM_STR]);
         array_push($param, [':p_city', $p_city, PDO::PARAM_STR]);
         array_push($param, [':p_phone', $p_phone, PDO::PARAM_STR]);
-        array_push($param, [':p_password', $p_password, PDO::PARAM_STR]);
         return parent::ginsert($sql, $param);
     }
 
-    // Actualizar los datos de la tabla
-    public function update($p_id, $p_name, $p_lastname, $p_email, $p_birthday, $p_address, $p_city, $p_phone)
-    {
-        $sql = "UPDATE `customers` 
-        SET `name`=:p_name, `lastname`=:p_lastname,`email`=:p_email,`birthday`=:p_birthday,`address`=:p_address,`city`=:p_city,`phone`=:p_phone 
-        WHERE `client_id` = :p_id";
-        $param = array();
-        array_push($param, [':p_name', $p_name, PDO::PARAM_STR]);
-        array_push($param, [':p_lastname', $p_lastname, PDO::PARAM_STR]);
-        array_push($param, [':p_email', $p_email, PDO::PARAM_STR]);
-        array_push($param, [':p_birthday', $p_birthday, PDO::PARAM_STR]);
-        array_push($param, [':p_address', $p_address, PDO::PARAM_STR]);
-        array_push($param, [':p_city', $p_city, PDO::PARAM_STR]);
-        array_push($param, [':p_phone', $p_phone, PDO::PARAM_STR]);
-        return parent::gupdate($sql, $param);
-    }
+    // Actualizar los datos de la tabla customers
+    // Actualizar los datos de la tabla customers
+public function update($p_id, $p_name, $p_lastname, $p_email, $p_address, $p_city, $p_phone)
+{
+    $sql = "UPDATE `customers` 
+            SET `name` = :p_name, 
+                `lastname` = :p_lastname,
+                `email` = :p_email,
+                `address` = :p_address,
+                `city` = :p_city,
+                `phone` = :p_phone
+            WHERE `id` = :p_id";
+    
+    $param = array();
+    array_push($param, [':p_id', $p_id, PDO::PARAM_INT]);
+    array_push($param, [':p_name', $p_name, PDO::PARAM_STR]);
+    array_push($param, [':p_lastname', $p_lastname, PDO::PARAM_STR]);
+    array_push($param, [':p_email', $p_email, PDO::PARAM_STR]);
+    array_push($param, [':p_address', $p_address, PDO::PARAM_STR]);
+    array_push($param, [':p_city', $p_city, PDO::PARAM_STR]);
+    array_push($param, [':p_phone', $p_phone, PDO::PARAM_STR]);
 
-    // Borrar un registro de la tabla
+    return parent::gupdate($sql, $param);
+}
+
+
+    // Borrar un registro de la tabla customers
     public function delete($p_id)
     {
         $sql = "DELETE FROM `customers` 
-        WHERE `client_id` = :p_id";
+        WHERE `id` = :p_id";
         $param = array();
         array_push($param, [':p_id', $p_id, PDO::PARAM_INT]);
         return parent::gdelete($sql, $param);
     }
 }
+
+?>

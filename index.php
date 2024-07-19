@@ -49,43 +49,35 @@ if ($segments[0] === 'bank') {
                         case 'profile':
                             include ROOT_VIEW . '/web/profile.php';
                             break;
+                        
                         case 'list':
-                            include ROOT_VIEW . '/web/bank/list.php';
+                            require ROOT_VIEW . '/web/bank/list.php';
+                            break;
+                        case 'create':
+                            require ROOT_VIEW . '/web/bank/create.php';
                             break;
                         case 'edit':
                             if (isset($segments[4])) {
                                 $_GET['id'] = $segments[4];
-                                $_GET['accion'] = 'EDIT';
                                 require ROOT_VIEW . '/web/bank/edit.php';
                             } else {
-                                home();
-                            }
-                            break;
-                        case 'new':
-                            if (isset($segments[4])) {
-                                $_GET['id'] = $segments[4];
-                                $_GET['accion'] = 'NEW';
-                                require ROOT_VIEW . '/web/bank/edit.php';
-                            } else {
-                                home();
+                                error404();
                             }
                             break;
                         case 'delete':
                             if (isset($segments[4])) {
                                 $_GET['id'] = $segments[4];
-                                $_GET['accion'] = 'DELETE';
-                                require ROOT_VIEW . '/web/bank/edit.php';
+                                require ROOT_VIEW . '/web/bank/delete.php';
                             } else {
-                                home();
+                                error404();
                             }
                             break;
                         case 'view':
                             if (isset($segments[4])) {
                                 $_GET['id'] = $segments[4];
-                                $_GET['accion'] = 'VIEW';
-                                require ROOT_VIEW . '/web/bank/edit.php';
+                                require ROOT_VIEW . '/web/bank/view.php';
                             } else {
-                                home();
+                                error404();
                             }
                             break;
                         default:

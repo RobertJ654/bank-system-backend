@@ -1,6 +1,4 @@
-<!--   Agregamos el HEADER   -->
-<?php require ROOT_VIEW.'/template/header.php'; ?>
-
+<?php include ROOT_VIEW . "/template/header.php"; ?>
 <?php
 $pId = $_GET['id'] ?? null;
 
@@ -8,28 +6,21 @@ $record = null;
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $data = [
-        'id' => $_POST['id'],
-        'name' => $_POST['name'],
-        'lastname' => $_POST['lastname'],
-        'email' => $_POST['email'],
-        'address' => $_POST['address'],
-        'city' => $_POST['city'],
-        'phone' => $_POST['phone'],
+        'id' => $_POST['id']
     ];
     $context = stream_context_create([
         'http' => [
-            'method' => 'PUT',
+            'method' => 'DELETE',
             'header' => "Content-Type: application/json",
             'content' => json_encode($data),
         ]
     ]);
     $url = HTTP_BASE . '/controller/CustomersController.php';
     $response = file_get_contents($url, false, $context);
-
-    var_dump($response);
     $result = json_decode($response, true);
     if ($result["ESTADO"]) {
         echo "<script>alert('Operacion realizada con Exito.');</script>";
+        echo '<script>window.location.href="'.HTTP_BASE.'/web/system/list'.'";</script>';
     } else {
         echo "<script>alert('Hubo un problema, se debe contactar con el adminsitrador.');</script>";
     }
@@ -46,6 +37,7 @@ if ($pId) {
 }
 
 ?>
+
 
 
 
@@ -171,19 +163,19 @@ if ($pId) {
                     <div class="col-md-6">
                     <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Nombres</label>
-                        <input type="text" class="form-control" name="name" required value="<?php echo $record['name']; ?>">
+                        <input type="text" class="form-control" name="name" required value="<?php echo $record['name']; ?>" disabled>
                     </div>
                     </div>
                     <div class="col-md-6">
                     <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Apellidos</label>
-                        <input class="form-control" type="text" name="lastname" required value="<?php echo $record['lastname']; ?>">
+                        <input class="form-control" type="text" name="lastname" required value="<?php echo $record['lastname']; ?>" disabled>
                     </div>
                     </div>
                     <div class="col-md-8">
                     <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Correo electrónico</label>
-                        <input class="form-control" type="email" name="email" required value="<?php echo $record['email']; ?>">
+                        <input class="form-control" type="email" name="email" required value="<?php echo $record['email']; ?>" disabled>
                     </div>
                     </div>
                     <div class="col-md-4">
@@ -199,19 +191,19 @@ if ($pId) {
                     <div class="col-md-12">
                     <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Dirección</label>
-                        <input class="form-control" type="text" name="address" required value="<?php echo $record['address']; ?>">
+                        <input class="form-control" type="text" name="address" required value="<?php echo $record['address']; ?>" disabled>
                     </div>
                     </div>
                     <div class="col-md-8">
                     <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Ciudad</label>
-                        <input class="form-control" type="text" name="city" required value="<?php echo $record['city']; ?>">
+                        <input class="form-control" type="text" name="city" required value="<?php echo $record['city']; ?>" disabled>
                     </div>
                     </div>
                     <div class="col-md-4">
                     <div class="form-group">
                         <label for="example-text-input" class="form-control-label">Teléfono</label>
-                        <input class="form-control" type="text" name="phone" required value="<?php echo $record['phone']; ?>">
+                        <input class="form-control" type="text" name="phone" required value="<?php echo $record['phone']; ?>" disabled>
                     </div>
                     </div>
                 </div>
@@ -220,18 +212,16 @@ if ($pId) {
 
 
                 </div>
-            
 
 
                 <div class="card-header pb-0">
                   <div class="d-flex align-items-center">
-                    <p class="mb-0"><b>Verifique su información antes de continuar</b></p>
-                    <button type="submit" class="btn btn-warning btn-sm ms-auto">Guardar</button>
+                    <p class="mb-0"><b>¿Está seguro de que desea eliminar este registro?</b></p>
+                    <button type="submit" class="btn btn-danger btn-sm ms-auto">Eliminar</button>
                   </div>
               </div>
 
             </form>
-
             <hr class="horizontal dark">
             <hr class="horizontal dark">
             <hr class="horizontal dark">
